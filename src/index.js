@@ -102,6 +102,12 @@ export default function fetch(url, opts) {
 					requestOpts.headers.delete('content-length');
 				}
 
+				// for 307 redirects, the body of the original request is reused to perform the redirected request
+				// https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307
+				if (res.statusCode === 307) {
+					requestOpts.body = request.body;
+				}
+
 				resolve(fetch(new Request(resolve_url(request.url, res.headers.location), requestOpts)));
 				return;
 			}

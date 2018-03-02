@@ -403,6 +403,45 @@ describe('node-fetch', () => {
 		});
 	});
 
+	it('should follow redirect code 307 with PATCH & body (#409)', function() {
+		url = `${base}redirect/307`;
+		opts = {
+			method: 'PATCH'
+			, body: 'a=1'
+		};
+		return fetch(url, opts).then(res => {
+			return res.json();
+		}).then(res => {
+			expect(res.body).to.equal('a=1');
+		});
+	});
+
+	it('should follow redirect code 301 but remove body (#409)', function() {
+		url = `${base}redirect/301`;
+		opts = {
+			method: 'PATCH'
+			, body: 'a=1'
+		};
+		return fetch(url, opts).then(res => {
+			return res.json();
+		}).then(res => {
+			expect(res.body).to.equal('');
+		});
+	});
+
+	it('should follow redirect code 302 but remove body (#409)', function() {
+		url = `${base}redirect/302`;
+		opts = {
+			method: 'PATCH'
+			, body: 'a=1'
+		};
+		return fetch(url, opts).then(res => {
+			return res.json();
+		}).then(res => {
+			expect(res.body).to.equal('');
+		});
+	});
+
 	it('should handle client-error response', function() {
 		url = `${base}error/400`;
 		return fetch(url).then(res => {
