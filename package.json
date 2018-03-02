@@ -1,5 +1,5 @@
 {
-  "name": "node-fetch",
+  "name": "@gr2m/node-fetch",
   "version": "2.0.0",
   "description": "A light-weight module that brings window.fetch to node.js",
   "main": "lib/index.js",
